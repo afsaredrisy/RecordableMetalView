@@ -1,30 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="18i-SZ-Ko8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="KRx-d6-sdd">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="RecordableMetalView_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="18i-SZ-Ko8" customClass="ViewController" customModule="RecordableMetalView_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="59b-NU-FWk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="0UK-iI-tA7" customClass="RecordableMetalView" customModule="RecordableMetalView">
+                                <rect key="frame" x="0.0" y="-24" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </mtkView>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rt9-oI-jyr">
+                                <rect key="frame" x="149" y="744" width="117" height="55"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="KU7-MI-978"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="ClickMe">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clikMeAction:" destination="18i-SZ-Ko8" eventType="touchUpInside" id="47F-6M-8jJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0UK-iI-tA7" firstAttribute="top" secondItem="kQf-lx-8SD" secondAttribute="top" constant="-44" id="T6C-XX-Cov"/>
+                            <constraint firstItem="rt9-oI-jyr" firstAttribute="leading" secondItem="kQf-lx-8SD" secondAttribute="leading" constant="149" id="T9V-2r-xDC"/>
+                            <constraint firstItem="0UK-iI-tA7" firstAttribute="leading" secondItem="kQf-lx-8SD" secondAttribute="leading" id="ab5-12-MN9"/>
+                            <constraint firstItem="0UK-iI-tA7" firstAttribute="height" secondItem="59b-NU-FWk" secondAttribute="height" id="bj7-Vq-ZUw"/>
+                            <constraint firstItem="kQf-lx-8SD" firstAttribute="bottom" secondItem="rt9-oI-jyr" secondAttribute="bottom" constant="63" id="lrP-ai-I7u"/>
+                            <constraint firstItem="0UK-iI-tA7" firstAttribute="width" secondItem="59b-NU-FWk" secondAttribute="width" id="vgw-Z0-NTN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kQf-lx-8SD"/>
                     </view>
+                    <connections>
+                        <outlet property="clickMe" destination="rt9-oI-jyr" id="0iV-pk-jKO"/>
+                        <outlet property="meatlView" destination="0UK-iI-tA7" id="XKR-Iz-OVi"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QFo-Z5-zfw" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="306" y="-89"/>
         </scene>
     </scenes>
 </document>

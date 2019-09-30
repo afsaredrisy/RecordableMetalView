@@ -30,6 +30,14 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Video recording</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone source</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App video storage</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App video storage</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
