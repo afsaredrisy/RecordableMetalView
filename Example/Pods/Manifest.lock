@@ -1,0 +1,16 @@
+PODS:
+  - RecordableMetalView (0.1.0)
+
+DEPENDENCIES:
+  - RecordableMetalView (from `../`)
+
+EXTERNAL SOURCES:
+  RecordableMetalView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  RecordableMetalView: 0f37a86dcb606d8c43c438d4b8ecf9f8691a50cf
+
+PODFILE CHECKSUM: 879204bbf1cd18cd4ef92f1e766de16918eae299
+
+COCOAPODS: 1.7.5

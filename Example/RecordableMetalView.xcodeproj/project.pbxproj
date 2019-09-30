@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		08B5582870A6C6966BAC78F2 /* Pods-RecordableMetalView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordableMetalView_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RecordableMetalView_Tests/Pods-RecordableMetalView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		1C55DC02976B719E53E4731F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		1C55DC02976B719E53E4731F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		27555F63026CDF97F08E24E4 /* Pods_RecordableMetalView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordableMetalView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D503A64CCBFBFBEA6A37CF /* Pods-RecordableMetalView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordableMetalView_Example.debug.xcconfig"; path = "Target Support Files/Pods-RecordableMetalView_Example/Pods-RecordableMetalView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4E9B22BDCD78EB1F5CD28F47 /* Pods-RecordableMetalView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordableMetalView_Example.release.xcconfig"; path = "Target Support Files/Pods-RecordableMetalView_Example/Pods-RecordableMetalView_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -43,8 +43,8 @@
 		607FACE51AFB9204008FA782 /* RecordableMetalView_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecordableMetalView_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		70D5880BF3016D955A59E521 /* RecordableMetalView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = RecordableMetalView.podspec; path = ../RecordableMetalView.podspec; sourceTree = "<group>"; };
-		D269C5C1D1E0F32E6C264F2E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		70D5880BF3016D955A59E521 /* RecordableMetalView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RecordableMetalView.podspec; path = ../RecordableMetalView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D269C5C1D1E0F32E6C264F2E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EE829A0FC362008F22804191 /* Pods_RecordableMetalView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordableMetalView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F921FFAD356CF5E452369EB5 /* Pods-RecordableMetalView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordableMetalView_Tests.release.xcconfig"; path = "Target Support Files/Pods-RecordableMetalView_Tests/Pods-RecordableMetalView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +147,6 @@
 				08B5582870A6C6966BAC78F2 /* Pods-RecordableMetalView_Tests.debug.xcconfig */,
 				F921FFAD356CF5E452369EB5 /* Pods-RecordableMetalView_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
