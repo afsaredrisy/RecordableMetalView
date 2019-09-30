@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'RecordableMetalView_Example' do
+  pod 'RecordableMetalView', :path => '../'
+
+  target 'RecordableMetalView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
