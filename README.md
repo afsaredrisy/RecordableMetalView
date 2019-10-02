@@ -1,7 +1,7 @@
 # RecordableMetalView
 
 [![CI Status](https://img.shields.io/travis/afsaredrisy/RecordableMetalView.svg?style=flat)](https://travis-ci.org/afsaredrisy/RecordableMetalView)
-[![Version](https://img.shields.io/cocoapods/v/RecordableMetalView.svg?style=flat)](https://cocoapods.org/pods/RecordableMetalView)
+[![Version](https://img.shields.io/badge/Version-0.1.0-lightgrey)](https://cocoapods.org/pods/RecordableMetalView)
 [![License](https://img.shields.io/cocoapods/l/RecordableMetalView.svg?style=flat)](https://cocoapods.org/pods/RecordableMetalView)
 [![Platform](https://img.shields.io/cocoapods/p/RecordableMetalView.svg?style=flat)](https://cocoapods.org/pods/RecordableMetalView)
 
