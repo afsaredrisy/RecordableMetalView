@@ -32,15 +32,12 @@ import MetalKit
     
     
     override init(frame frameRect: CGRect, device: MTLDevice?) {
-        //print("Initializing MetalView")
         super.init(frame: frameRect, device: device)
         setupMetal()
     }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        //print("Initializing with NSCoder")
-        
         // Make sure we are on a device that can run metal!
         guard let defaultDevice = MTLCreateSystemDefaultDevice() else {
             fatalError("Device loading error")
@@ -53,14 +50,12 @@ import MetalKit
     }
     
     private func setupMetal(){
-        //print("setting up metal")
         self.layer.zPosition = 0
         context = CIContext(mtlDevice: device!, options: [kCIContextPriorityRequestLow: NSNumber(booleanLiteral: true)])
         commandQueue = device!.makeCommandQueue()!
         self.framebufferOnly = false
         self.colorPixelFormat = .bgra8Unorm
         self.device = device
-        
     }
     
     
