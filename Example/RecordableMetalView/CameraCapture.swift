@@ -51,7 +51,7 @@ class CameraCapture: NSObject {
             let device =
             AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
                                              mediaType: AVMediaType.video,
-                                             position: AVCaptureDevice.Position.front).devices.first,
+                                             position: AVCaptureDevice.Position.back).devices.first,
             let deviceInput = try? AVCaptureDeviceInput(device: device),
             captureSession.canAddInput(deviceInput) else { return }
         
