@@ -9,7 +9,7 @@ We use  `MTKView`  to render custom videos and animations. MTKView does not prov
 The objective of this project is to provide easy and efficient way to directly record video + audio (Either with MIC source or Audio file). 
 
 ## Demo
-![image](https://doc-0k-10-docs.googleusercontent.com/docs/securesc/v4bhovst8h1422gvgmikbq5v1t8c8kqp/993f7e0mclvm3qv0nlfrikdmdgmevqph/1570276800000/10559461401230934508/10559461401230934508/17JinR9YkwDPW_fN0EYS5ISUHTmmXSwoQ?e=view&nonce=eqon8fogb2u3o&user=10559461401230934508&hash=i12b04ga2s34uv3gq7iouvtkv2l90elj)
+![image](https://drive.google.com/uc?export=view&id=17JinR9YkwDPW_fN0EYS5ISUHTmmXSwoQ)
 
 ## Example
 
