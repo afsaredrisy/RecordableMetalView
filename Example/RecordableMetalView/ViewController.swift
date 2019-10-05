@@ -14,7 +14,8 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     
     
     
-    
+    let recordText = "Start Recording"
+    let stopText = "Stop Recording"
     @IBOutlet weak var clickMe: UIButton!
     @IBOutlet weak var meatlView: RecordableMetalView!
     let albumName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
@@ -33,6 +34,7 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         let ciimage = CIImage(cgImage: (image?.cgImage)!)
         meatlView.recordingDelegate = self
         meatlView.draw(ciimage: ciimage)
+        updateUI()
         
     }
     
@@ -49,8 +51,21 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
             recoding = true
             meatlView.startVideoRecoding()
         }
+        updateUI()
         
     }
+    
+    func updateUI(){
+        
+        if recoding{
+            clickMe.setTitle(stopText, for: .normal)
+        }
+        else {
+            clickMe.setTitle(recordText, for: .normal)
+        }
+        
+    }
+    
     func didCompleteRecording(url: URL) {
         print("Completed at \(url)")
         self.fileUrl = url
@@ -82,10 +97,9 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     
     func saveFileWithSD(fileUrl: URL){
         //saveImageWithSD()
-        print("Saving with SD")
         SDPhotosHelper.addNewVideo(withFileUrl: fileUrl, inAlbum: self.albumName, onSuccess: { ( identifier) in
-            print("Saved image successfully, identifier is \(identifier)")
-            let alert = UIAlertController.init(title: "Success", message: "Image added, id : \(identifier)", preferredStyle: .alert)
+   
+            let alert = UIAlertController.init(title: "Success", message: "File added, id : \(identifier)", preferredStyle: .alert)
             let actionOk = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
             alert.addAction(actionOk)
             OperationQueue.main.addOperation({
