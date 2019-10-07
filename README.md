@@ -21,6 +21,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 In this example each frame from camera is being filtered and overlayed on a static image and then redered on `RecordableMetalView`. OnTapped button video recording will start, onTapped on stop button video recording will stop and will save in photo library.
 
 ## Requirements
+- [*] Xcode 11.
+- [*] Swift 5.
+- [*] iOS 11 or higher.
 
 ## Installation
 
