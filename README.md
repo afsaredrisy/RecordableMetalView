@@ -60,9 +60,12 @@ metalView.draw(ciimage: ciimage)
 
 ### Setting up RecordableMetalView callback delegate.
 
-You need implement `RecordableMetalDelegate` inorder to get callback on recording events like  start and stop. for simplicity just implement `RecordableMetalDelegate` in your ViewController and set `metalView.recordingDelegate = self`.
+You need to implement `RecordableMetalDelegate` inorder to get callback on recording events like  start and stop. for simplicity just implement `RecordableMetalDelegate` in your ViewController and set `metalView.recordingDelegate = self`.
 
 ```swift
+import UIKit
+import RecordableMetalView
+
 class ViewController: UIViewController, RecordableMetalDelegate{
 
 @IBOutlet weak var metalView: RecordableMetalView!
@@ -113,6 +116,6 @@ Once you stop recording one of `RecordableMetalDelegate` method will invoke. `di
 A special thank for using RecordableMetalView,  Your support is appreciated! if you want to make this library better. If you'd like to contribute, please feel free to create a PR.
 
 ## Author
-Afsar Ahamad. afsaredrisy@gmail.com
+Afsar Ahamad: afsaredrisy@gmail.com
 ## License
 RecordableMetalView is available under the MIT license. See the LICENSE file for more info.
