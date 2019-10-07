@@ -11,9 +11,14 @@ The objective of this project is to provide easy and efficient way to directly r
 ## Demo
 ![image](https://drive.google.com/uc?export=view&id=17JinR9YkwDPW_fN0EYS5ISUHTmmXSwoQ)
 
-## Example
+## Feature
+* API to render CIImage directly on MTKView with 30 fps.
+* Record video rendered on MetalView with MIC audio source. 
+* Record video rendered on MetalView with Custom audio track.
 
+## Example
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+In this example each frame from camera is being filtered and overlayed on a static image and then redered on `RecordableMetalView`. OnTapped button video recording will start, onTapped on stop button video recording will stop and will save in photo library.
 
 ## Requirements
 
