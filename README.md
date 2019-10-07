@@ -26,13 +26,24 @@ In this example each frame from camera is being filtered and overlayed on a stat
 - [x] iOS 11 or higher.
 
 ## Installation
-
 RecordableMetalView is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
-
 ```ruby
 pod 'RecordableMetalView'
 ```
+
+## Usage
+
+### Creating  RecordableMetalView (Storyboard Implementation).
+Create a `MTKView` from object library and set `custom class`  of `MTKView`  to be `RecordableMetalView ` 
+![image](https://drive.google.com/uc?export=view&id=1Ivi9hLGiczXxxZt595ynLq2i0ukx-Pgq)
+Next step is to create an outlet of this view to your `ViewController` class by draging mouse from MTKView to `ViewController` + holding `control` key. 
+
+```swift
+    @IBOutlet weak var metalView: RecordableMetalView!
+```
+
+
 
 ## Author
 
