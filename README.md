@@ -28,7 +28,7 @@ pod 'RecordableMetalView'
 
 ## Author
 
-afsaredrisy, afsaredrisz@icloud.com
+Afsar Edrisy, afsaredrisz@icloud.com
 
 ## License
 
