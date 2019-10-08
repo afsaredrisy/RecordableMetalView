@@ -22,12 +22,9 @@
                                 <rect key="frame" x="0.0" y="-24" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </mtkView>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rt9-oI-jyr">
-                                <rect key="frame" x="149" y="744" width="117" height="55"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="KU7-MI-978"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rt9-oI-jyr">
+                                <rect key="frame" x="129" y="575" width="117" height="55"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="ClickMe">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,12 +36,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="rt9-oI-jyr" firstAttribute="centerX" secondItem="0UK-iI-tA7" secondAttribute="centerX" id="2rp-3x-w4M"/>
+                            <constraint firstItem="kQf-lx-8SD" firstAttribute="bottom" secondItem="rt9-oI-jyr" secondAttribute="bottom" constant="37" id="Npb-0M-M91"/>
+                            <constraint firstItem="rt9-oI-jyr" firstAttribute="top" secondItem="kQf-lx-8SD" secondAttribute="top" constant="555" id="Nps-d5-Dih"/>
                             <constraint firstItem="0UK-iI-tA7" firstAttribute="top" secondItem="kQf-lx-8SD" secondAttribute="top" constant="-44" id="T6C-XX-Cov"/>
-                            <constraint firstItem="rt9-oI-jyr" firstAttribute="leading" secondItem="kQf-lx-8SD" secondAttribute="leading" constant="149" id="T9V-2r-xDC"/>
                             <constraint firstItem="0UK-iI-tA7" firstAttribute="leading" secondItem="kQf-lx-8SD" secondAttribute="leading" id="ab5-12-MN9"/>
                             <constraint firstItem="0UK-iI-tA7" firstAttribute="height" secondItem="59b-NU-FWk" secondAttribute="height" id="bj7-Vq-ZUw"/>
-                            <constraint firstItem="kQf-lx-8SD" firstAttribute="bottom" secondItem="rt9-oI-jyr" secondAttribute="bottom" constant="63" id="lrP-ai-I7u"/>
                             <constraint firstItem="0UK-iI-tA7" firstAttribute="width" secondItem="59b-NU-FWk" secondAttribute="width" id="vgw-Z0-NTN"/>
+                            <constraint firstItem="rt9-oI-jyr" firstAttribute="leading" secondItem="kQf-lx-8SD" secondAttribute="leading" constant="129" id="vqK-6t-jDo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kQf-lx-8SD"/>
                     </view>

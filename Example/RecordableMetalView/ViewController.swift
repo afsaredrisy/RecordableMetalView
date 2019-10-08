@@ -34,6 +34,9 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         let ciimage = CIImage(cgImage: (image?.cgImage)!)
         meatlView.recordingDelegate = self
         meatlView.draw(ciimage: ciimage)
+        
+        clickMe.layer.cornerRadius = 10
+        
         updateUI()
         
     }
@@ -124,7 +127,7 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         }
         
         let imageCg = CGImage.create(pixelBuffer: pixelBuffer)
-        let maskedCg = maskImage(image: UIImage(cgImage: imageCg!), mask: staticImage!)//imageByMergingImages(topImage: staticImage!, bottomImage: UIImage(cgImage: imageCg!))
+        let maskedCg = imageByMergingImages(topImage: staticImage!, bottomImage: UIImage(cgImage: imageCg!))
         let ciimage = CIImage(cgImage: maskedCg.cgImage!)
         let image : UIImage = UIImage(ciImage: ciimage)
         drawImage(image: image)
@@ -141,6 +144,10 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         }
         meatlView.draw(ciimage: applyFiletr(ciimage: ciimage))
     }
+    
+    
+    //MARK: Image proccessing
+    
     func applyFiletr(ciimage: CIImage) -> CIImage{
         if let currentFilter = CIFilter(name: "CISepiaTone"){
             currentFilter.setValue(ciimage, forKey: kCIInputImageKey)
@@ -173,43 +180,6 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         UIGraphicsEndImageContext()
         return im
     }
-    
-    
-    func maskImage(image:UIImage, mask:(UIImage))->UIImage{
-        
-        let inv = invert(originalImage: mask)
-        let imageReference = image.cgImage
-        let maskReference = inv.cgImage
-        
-        let imageMask = CGImage(maskWidth: maskReference!.width,
-                                height: maskReference!.height,
-                                bitsPerComponent: maskReference!.bitsPerComponent,
-                                bitsPerPixel: maskReference!.bitsPerPixel,
-                                bytesPerRow: maskReference!.bytesPerRow,
-                                provider: maskReference!.dataProvider!, decode: nil, shouldInterpolate: true)
-        let maskedReference = imageReference?.masking(imageMask!)
-        
-        let maskedImage = UIImage(cgImage:maskedReference!)
-        return maskedImage
-    }
-    
-    func invert(originalImage: UIImage) -> UIImage{
-        
-        let image = CIImage(cgImage: originalImage.cgImage!)
-        if let filter = CIFilter(name: "CIColorInvert") {
-            filter.setDefaults()
-            filter.setValue(image, forKey: kCIInputImageKey)
-            
-            let context = CIContext(options: nil)
-            let imageRef = context.createCGImage(filter.outputImage!, from: image.extent)
-            //print("Inverted done")
-            return UIImage(cgImage: imageRef!)
-        }
-        
-        return originalImage
-        
-    }
-    
     
 }
 

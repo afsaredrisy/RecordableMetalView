@@ -9,7 +9,7 @@ We use  `MTKView`  to render custom videos and animations. MTKView does not prov
 The objective of this project is to provide easy and efficient way to directly record video + audio (Either with MIC source or Audio file). 
 
 ## Demo
-![image](https://drive.google.com/uc?export=view&id=17JinR9YkwDPW_fN0EYS5ISUHTmmXSwoQ)
+![image](https://drive.google.com/uc?export=view&id=1nXWxL2r0jbDpO1ElljsVZhkPzrqljVxX)
 
 ## Feature
 * API to render CIImage directly on MTKView with 30 fps.
