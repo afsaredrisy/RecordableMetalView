@@ -21,7 +21,7 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     let albumName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
     var fileUrl: URL?
     var recoding = false
-    
+    let staticImage = UIImage(named: "anim")
     let cameraCapturer = CameraCapture()
     
     override func viewDidLoad() {
@@ -124,15 +124,17 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
         }
         
         let imageCg = CGImage.create(pixelBuffer: pixelBuffer)
-        let ciimage = CIImage(cgImage: imageCg!)
+        let maskedCg = maskImage(image: UIImage(cgImage: imageCg!), mask: staticImage!)//imageByMergingImages(topImage: staticImage!, bottomImage: UIImage(cgImage: imageCg!))
+        let ciimage = CIImage(cgImage: maskedCg.cgImage!)
         let image : UIImage = UIImage(ciImage: ciimage)
-        
         drawImage(image: image)
         
         
     }
     
     func drawImage(image: UIImage){
+        
+        
         
         guard let ciimage = image.ciImage else{
             return
@@ -154,6 +156,63 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     }
     
     
+    func imageByMergingImages(topImage: UIImage, bottomImage: UIImage, scaleForTop: CGFloat = 1.0) -> UIImage {
+        let size = bottomImage.size
+        let container = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+        UIGraphicsGetCurrentContext()!.interpolationQuality = .high
+        bottomImage.draw(in: container)
+        
+        let topWidth = size.width / scaleForTop
+        let topHeight = size.height / scaleForTop
+        let topX = (size.width / 2.0) - (topWidth / 2.0)
+        let topY = (size.height / 2.0) - (topHeight / 2.0)
+        
+        topImage.draw(in: CGRect(x: topX, y: topY, width: topWidth, height: topHeight), blendMode: .normal, alpha: 1.0)
+        let im = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return im
+    }
+    
+    
+    func maskImage(image:UIImage, mask:(UIImage))->UIImage{
+        
+        let inv = invert(originalImage: mask)
+        let imageReference = image.cgImage
+        let maskReference = inv.cgImage
+        
+        let imageMask = CGImage(maskWidth: maskReference!.width,
+                                height: maskReference!.height,
+                                bitsPerComponent: maskReference!.bitsPerComponent,
+                                bitsPerPixel: maskReference!.bitsPerPixel,
+                                bytesPerRow: maskReference!.bytesPerRow,
+                                provider: maskReference!.dataProvider!, decode: nil, shouldInterpolate: true)
+        let maskedReference = imageReference?.masking(imageMask!)
+        
+        let maskedImage = UIImage(cgImage:maskedReference!)
+        return maskedImage
+    }
+    
+    func invert(originalImage: UIImage) -> UIImage{
+        
+        let image = CIImage(cgImage: originalImage.cgImage!)
+        if let filter = CIFilter(name: "CIColorInvert") {
+            filter.setDefaults()
+            filter.setValue(image, forKey: kCIInputImageKey)
+            
+            let context = CIContext(options: nil)
+            let imageRef = context.createCGImage(filter.outputImage!, from: image.extent)
+            //print("Inverted done")
+            return UIImage(cgImage: imageRef!)
+        }
+        
+        return originalImage
+        
+    }
+    
     
 }
+
+
+
 
