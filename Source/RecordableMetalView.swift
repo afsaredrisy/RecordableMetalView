@@ -71,7 +71,22 @@ import MetalKit
             else {
                 return
         }
-        let currentTexture = currentDrawable.texture
+        
+        if UIDevice.current.isSimulator{
+            fatalError("MetalView Doest not support simulator")
+        }
+        let currentTexture: MTLTexture
+        #if targetEnvironment(simulator)
+        // your simulator code
+            fatalError("MetalView Doest not support simulator")
+        #else
+        // your real device code
+         currentTexture = currentDrawable.texture
+        #endif
+        
+        
+        
+        
         let drawingBounds = CGRect(origin: .zero, size: drawableSize)
         
         let scaleX = drawableSize.width / image.extent.width
@@ -238,4 +253,13 @@ extension RecordableMetalView{
     }
     
     
+}
+extension UIDevice {
+    var isSimulator: Bool {
+        #if IOS_SIMULATOR
+        return true
+        #else
+        return false
+        #endif
+    }
 }
