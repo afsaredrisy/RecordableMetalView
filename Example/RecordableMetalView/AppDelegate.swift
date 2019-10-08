@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  RecordableMetalView
-//
-//  Created by afsaredrisy on 09/30/2019.
-//  Copyright (c) 2019 afsaredrisy. All rights reserved.
-//
 
 import UIKit
 

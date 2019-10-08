@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  RecordMetal
-//
-//  Created by Introtuce on 28/09/19.
-//  Copyright © 2019 Introtuce. All rights reserved.
-//
+
 
 import UIKit
 import AVFoundation
