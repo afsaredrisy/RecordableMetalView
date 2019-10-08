@@ -76,7 +76,7 @@ import MetalKit
             fatalError("MetalView Doest not support simulator")
         }
         let currentTexture: MTLTexture
-        #if targetEnvironment(simulator)
+        #if (arch(x86_64) || arch(i386)) && os(iOS)
         // your simulator code
             fatalError("MetalView Doest not support simulator")
         #else

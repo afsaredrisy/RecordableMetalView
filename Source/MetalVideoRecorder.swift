@@ -110,14 +110,14 @@ class MetalVideoRecorder: NSObject{
             
             self.audioConnection = self.audioOutput.connection(with: AVMediaType.audio)
             self.session.commitConfiguration()
-            if self.audioOutput == nil{
+            /*if self.audioOutput == nil{
                 print("Audio device Not Available")
                 
             }
             else {
                 //print("Audio output source intiated successfully")
             }
-        
+        */
             self.startRecording()
        }
     }
