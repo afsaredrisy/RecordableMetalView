@@ -73,46 +73,11 @@ extension CGImage {
 }
 
 extension CGImage {
-    /**
-     Creates a new CGImage from a CVPixelBuffer.
-     - Note: Not all CVPixelBuffer pixel formats support conversion into a
-     CGImage-compatible pixel format.
-     */
     public static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(pixelBuffer, nil, &cgImage)
         return cgImage
     }
-    
-    /*
-     // Alternative implementation:
-     public static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
-     // This method creates a bitmap CGContext using the pixel buffer's memory.
-     // It currently only handles kCVPixelFormatType_32ARGB images. To support
-     // other pixel formats too, you'll have to change the bitmapInfo and maybe
-     // the color space for the CGContext.
-     guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly) else {
-     return nil
-     }
-     defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly) }
-     if let context = CGContext(data: CVPixelBufferGetBaseAddress(pixelBuffer),
-     width: CVPixelBufferGetWidth(pixelBuffer),
-     height: CVPixelBufferGetHeight(pixelBuffer),
-     bitsPerComponent: 8,
-     bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
-     space: CGColorSpaceCreateDeviceRGB(),
-     bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue),
-     let cgImage = context.makeImage() {
-     return cgImage
-     } else {
-     return nil
-     }
-     }
-     */
-    
-    /**
-     Creates a new CGImage from a CVPixelBuffer, using Core Image.
-     */
     public static func create(pixelBuffer: CVPixelBuffer, context: CIContext) -> CGImage? {
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         let rect = CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(pixelBuffer),

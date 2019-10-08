@@ -103,22 +103,17 @@ import MetalKit
 extension RecordableMetalView{
     
     fileprivate func startRecording(){
-        //print("Recording will start")
         if isRecoding == false{
             let appname = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
             let name = appname + String(Int(CFAbsoluteTimeGetCurrent()))
             self.fileUrl = createFile(name: name)
-            //prepExporter()
             recoder = MetalVideoRecorder(outputURL: self.fileUrl!, size: self.drawableSize)
-            //recoder?.setExporter(exporter: self.exporter!)
             createAudioRecorder()
             isRecoding=true
-            //With track
             if isTrackSelected {
                 playTrack()
                 recoder?.setUpAudio()
             }
-                // Without Track with MIC
             else{
                 recoder?.setUpAudio()
                 startAudioRecording()
@@ -131,7 +126,6 @@ extension RecordableMetalView{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
         let filePath="\(documentsPath)/"+name+".mp4"
         let url = URL(fileURLWithPath: filePath)
-        // let url = URL(fileReferenceLiteralResourceName: filePath)
         let audioFilePath = "\(documentsPath)/"+name+"aud.m4a"
         self.audioFileUrl = URL(fileURLWithPath: audioFilePath)
         
@@ -164,7 +158,6 @@ extension RecordableMetalView{
     
     fileprivate func createAudioRecorderWithoutTrack(){
         audioRecorder = Recording(to: "recording.m4a")
-        //audioRecorder?.delegate = self
         do {
             try self.audioRecorder!.prepare()
         } catch {
@@ -188,7 +181,6 @@ extension RecordableMetalView{
         
         do {
             try audioRecorder!.record()
-            //print("Audio recording")
         } catch {
             print(error)
         }
@@ -200,7 +192,6 @@ extension RecordableMetalView{
             isRecoding=false
             stopAudioRecording()
             recoder?.endRecording({(
-               // print("Ended Recor"),
                 self.merge()
                 
                 )})
@@ -212,14 +203,11 @@ extension RecordableMetalView{
         
         let merger = Merger()
         merger.mergeVideoWithAudio(videoUrl: fileUrl!, audioUrl: audioRecorder!.getUrl(), success: {url in
-           // print("Merger success")
             self.fileUrl = url
             if let rDelegate = self.recordingDelegate{
                 rDelegate.didCompleteRecording(url: url)
             }
-         //   self.saveFile()
         }, failure: {error in
-           // print("Merge fail \(String(describing: error))")
             if let rDelegate = self.recordingDelegate{
                 rDelegate.didFailRecording(error: error!)
             }
@@ -232,7 +220,6 @@ extension RecordableMetalView{
     
     func stopAudioRecording() {
         audioRecorder?.stop()
-       // print("Audio recording stopped")
     }
     
     public func startVideoRecoding(){

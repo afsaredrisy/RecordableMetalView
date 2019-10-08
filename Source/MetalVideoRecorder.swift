@@ -156,7 +156,6 @@ class MetalVideoRecorder: NSObject{
         guard let pixelBufferPool = assetWriterPixelBufferInput.pixelBufferPool else {
             print("Pixel buffer asset writer input did not have a pixel buffer pool available; cannot retrieve frame")
             //try file exits or not
-            
             checkFile(path: url.path)
             
             return
@@ -212,20 +211,10 @@ extension MetalVideoRecorder: AVCaptureAudioDataOutputSampleBufferDelegate {
     
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-       // print("Audio capturing")
-        //while assertWriterAudioInput.isReadyForMoreMediaData {}
-        
-        
-       // let frameTime = CACurrentMediaTime() - recordingStartTime
-        //let presentationTime = CMTimeMakeWithSeconds(frameTime, preferredTimescale: 240)
         let description = CMSampleBufferGetFormatDescription(sampleBuffer)!
-        
         if CMFormatDescriptionGetMediaType(description) == kCMMediaType_Audio {
             if self.assertWriterAudioInput.isReadyForMoreMediaData {
-                //print("appendSampleBuffer audio");
-               // self.assertWriterAudioInput.append(sampleBuffer)
                 self.audioBuffer = sampleBuffer
-              //  print("appendSampleBuffer audio");
             }
         }
     }
