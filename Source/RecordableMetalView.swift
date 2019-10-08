@@ -27,7 +27,7 @@ import MetalKit
     }()
     
     private lazy var content: CIContext = {
-        return CIContext(mtlDevice: self.device!, options: [kCIContextWorkingColorSpace : NSNull()])
+        return CIContext(mtlDevice: self.device!, options: [CIContextOption.workingColorSpace : NSNull()])
     }()
     
     
@@ -51,7 +51,7 @@ import MetalKit
     
     private func setupMetal(){
         self.layer.zPosition = 0
-        context = CIContext(mtlDevice: device!, options: [kCIContextPriorityRequestLow: NSNumber(booleanLiteral: true)])
+        context = CIContext(mtlDevice: device!, options: [CIContextOption.priorityRequestLow: NSNumber(booleanLiteral: true)])
         commandQueue = device!.makeCommandQueue()!
         self.framebufferOnly = false
         self.colorPixelFormat = .bgra8Unorm

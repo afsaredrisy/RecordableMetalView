@@ -32,7 +32,7 @@ class MetalVideoRecorder: NSObject{
         self.url=url
         do {
             assetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileType.mp4)
-            self.assetWriter.movieFragmentInterval = kCMTimeInvalid
+            self.assetWriter.movieFragmentInterval = CMTime.invalid
             self.assetWriter.shouldOptimizeForNetworkUse = true
 
         } catch {
@@ -129,7 +129,7 @@ class MetalVideoRecorder: NSObject{
         
         assetWriter.startWriting()
          self.audioOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
-        assetWriter.startSession(atSourceTime: kCMTimeZero)
+        assetWriter.startSession(atSourceTime: CMTime.zero)
         
         recordingStartTime = CACurrentMediaTime()
         isRecording = true
@@ -180,7 +180,7 @@ class MetalVideoRecorder: NSObject{
         texture.getBytes(pixelBufferBytes, bytesPerRow: bytesPerRow, from: region, mipmapLevel: 0)
         
         let frameTime = CACurrentMediaTime() - recordingStartTime
-        let presentationTime = CMTimeMakeWithSeconds(frameTime, 240)
+        let presentationTime = CMTimeMakeWithSeconds(frameTime, preferredTimescale: 240)
         assetWriterPixelBufferInput.append(pixelBuffer, withPresentationTime: presentationTime)
        
         

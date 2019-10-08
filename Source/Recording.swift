@@ -69,7 +69,7 @@ open class Recording : NSObject {
             try prepare()
         }
         
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try session.setCategory(AVAudioSession.Category.playAndRecord)
         try session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
         
         recorder?.record()
@@ -83,7 +83,7 @@ open class Recording : NSObject {
     // MARK: - Playback
     
     open func play() throws {
-        try session.setCategory(AVAudioSessionCategoryPlayback)
+        try session.setCategory(AVAudioSession.Category.playback)
         
         player = try AVAudioPlayer(contentsOf: url)
         player?.play()
@@ -121,7 +121,7 @@ open class Recording : NSObject {
     
     fileprivate func startMetering() {
         link = CADisplayLink(target: self, selector: #selector(Recording.updateMeter))
-        link?.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+        link?.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
     }
     
     fileprivate func stopMetering() {
