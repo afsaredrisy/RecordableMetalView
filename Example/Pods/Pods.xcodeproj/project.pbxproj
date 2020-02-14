@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1217090A23F6C74E00D9BA2D /* SongExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1217090923F6C74E00D9BA2D /* SongExporter.swift */; };
 		12FC17B523427C490020C96E /* RecordableMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC17B123427C490020C96E /* RecordableMetalView.swift */; };
 		12FC17B623427C490020C96E /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC17B223427C490020C96E /* Recording.swift */; };
 		12FC17B723427C490020C96E /* MetalVideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC17B323427C490020C96E /* MetalVideoRecorder.swift */; };
@@ -44,6 +45,7 @@
 		05CF4D84023742D384E2CC6DABB1667E /* RecordableMetalView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RecordableMetalView-umbrella.h"; sourceTree = "<group>"; };
 		08EB431A8F08CFE2E44D9907D2E072B3 /* Pods-RecordableMetalView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RecordableMetalView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		0A1F4FED070548A0D09A9CBB6A578649 /* RecordableMetalView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RecordableMetalView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1217090923F6C74E00D9BA2D /* SongExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongExporter.swift; sourceTree = "<group>"; };
 		12FC17B123427C490020C96E /* RecordableMetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordableMetalView.swift; sourceTree = "<group>"; };
 		12FC17B223427C490020C96E /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		12FC17B323427C490020C96E /* MetalVideoRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalVideoRecorder.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				12FC17B323427C490020C96E /* MetalVideoRecorder.swift */,
 				12FC17B123427C490020C96E /* RecordableMetalView.swift */,
 				12FC17B223427C490020C96E /* Recording.swift */,
+				1217090923F6C74E00D9BA2D /* SongExporter.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -331,7 +334,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					6887574FFF040F875EF967C80597B814 = {
 						DevelopmentTeam = 96D69N5Y99;
@@ -340,6 +343,7 @@
 					};
 					7A82C20831B733D564A33965A1110E50 = {
 						DevelopmentTeam = 96D69N5Y99;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -350,6 +354,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = C8D3FF362B1D5C7DD5EDA21CAF6CA7DA /* Products */;
@@ -395,6 +400,7 @@
 				292F63EE91A6AAE4EB8AAA221B11899B /* RecordableMetalView-dummy.m in Sources */,
 				12FC17B623427C490020C96E /* Recording.swift in Sources */,
 				12FC17B523427C490020C96E /* RecordableMetalView.swift in Sources */,
+				1217090A23F6C74E00D9BA2D /* SongExporter.swift in Sources */,
 				12FC17B723427C490020C96E /* MetalVideoRecorder.swift in Sources */,
 				12FC17B823427C490020C96E /* Merger.swift in Sources */,
 			);
@@ -473,7 +479,7 @@
 			baseConfigurationReference = 32338968D8432AD149A08C1ACCAADEFE /* RecordableMetalView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -665,7 +671,8 @@
 			baseConfigurationReference = 57376B92E09697BE02711E3077DB201C /* Pods-RecordableMetalView_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -690,6 +697,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -701,7 +710,8 @@
 			baseConfigurationReference = 592E6F73C65A5FA8C8A5A7107443E0E7 /* Pods-RecordableMetalView_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -726,6 +736,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -738,7 +749,7 @@
 			baseConfigurationReference = 32338968D8432AD149A08C1ACCAADEFE /* RecordableMetalView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";

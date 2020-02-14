@@ -3,11 +3,11 @@ import Foundation
 import Metal
 import MetalKit
 
- public protocol RecordableMetalDelegate {
+public protocol RecordableMetalDelegate {
     func didCompleteRecording(url: URL)
     func didFailRecording(error: Error)
 }
- public class RecordableMetalView: MTKView{
+public class RecordableMetalView: MTKView{
     
     var ciImage: CIImage?
     //GPU Delegate
@@ -21,6 +21,7 @@ import MetalKit
     private var recoder: MetalVideoRecorder?
     private var audioRecorder: Recording?
     public var recordingDelegate: RecordableMetalDelegate? = nil
+    fileprivate var iserror = false
     private let colorSpace = CGColorSpaceCreateDeviceRGB()
     private lazy var commandQueue: MTLCommandQueue? = {
         return self.device!.makeCommandQueue()
@@ -46,10 +47,11 @@ import MetalKit
         colorPixelFormat = .bgra8Unorm
         clearColor = MTLClearColor(red: 0.1, green: 0.57, blue: 0.25, alpha: 1)
         setupMetal()
-       
+        
     }
     
     private func setupMetal(){
+        print("Metal setup done")
         self.layer.zPosition = 0
         context = CIContext(mtlDevice: device!, options: [CIContextOption.priorityRequestLow: NSNumber(booleanLiteral: true)])
         commandQueue = device!.makeCommandQueue()!
@@ -61,14 +63,16 @@ import MetalKit
     
     public func draw(ciimage: CIImage){
         self.ciImage = ciimage
+        //draw()
     }
     
     override public func draw(_ rect: CGRect) {
-       
+        
         guard let image = ciImage,
             let currentDrawable = currentDrawable,
             let commandBuffer = commandQueue?.makeCommandBuffer()
             else {
+                //print("Initial commandQueue error")
                 return
         }
         
@@ -78,10 +82,10 @@ import MetalKit
         let currentTexture: MTLTexture
         #if (arch(x86_64) || arch(i386)) && os(iOS)
         // your simulator code
-            fatalError("MetalView Doest not support simulator")
+        fatalError("MetalView Doest not support simulator")
         #else
         // your real device code
-         currentTexture = currentDrawable.texture
+        currentTexture = currentDrawable.texture
         #endif
         
         
@@ -91,18 +95,18 @@ import MetalKit
         
         let scaleX = drawableSize.width / image.extent.width
         let scaleY = drawableSize.height / image.extent.height
-         let scale = min(scaleX, scaleY)
+        let scale = min(scaleX, scaleY)
         let width = image.extent.width * scale
         let height = image.extent.height * scale
         let originX = (drawingBounds.width - width) / 2
         let originY = (drawingBounds.height - height) / 2
-        let scaledImage = image.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY)).transformed(by: CGAffineTransform(translationX: originX, y: originY))
+        let scaledImage = image.transformed(by: CGAffineTransform(scaleX: scale, y: scale)).transformed(by: CGAffineTransform(translationX: originX, y: originY))
         
         content.render(scaledImage, to: currentTexture, commandBuffer: commandBuffer, bounds: scaledImage.extent, colorSpace: colorSpace)
         
         if isRecoding {
             commandBuffer.addCompletedHandler { (buffer) in
-                self.recoder?.writeFrame(forTexture: currentTexture)
+                self.recoder?.writeFrame(forTexture: currentDrawable.texture)
             }
         }
         
@@ -122,7 +126,10 @@ extension RecordableMetalView{
             let appname = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
             let name = appname + String(Int(CFAbsoluteTimeGetCurrent()))
             self.fileUrl = createFile(name: name)
+            checkFile(path: self.fileUrl!.path)
+            print("FileInfo")
             recoder = MetalVideoRecorder(outputURL: self.fileUrl!, size: self.drawableSize)
+            recoder?.errorDelegate = self
             createAudioRecorder()
             isRecoding=true
             if isTrackSelected {
@@ -136,8 +143,23 @@ extension RecordableMetalView{
         }
         
     }
+    func checkFile(path: String){
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("nexmetest") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                print("FILE AVAILABLE")
+            } else {
+                print("FILE NOT AVAILABLE")
+            }
+        } else {
+            print("FILE PATH NOT AVAILABLE")
+        }
+    }
     
-   fileprivate func createFile(name: String)->URL{
+    fileprivate func createFile(name: String)->URL{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
         let filePath="\(documentsPath)/"+name+".mp4"
         let url = URL(fileURLWithPath: filePath)
@@ -206,6 +228,10 @@ extension RecordableMetalView{
         if isRecoding{
             isRecoding=false
             stopAudioRecording()
+            if iserror{
+                print("Recording could not finish ...")
+                return
+            }
             recoder?.endRecording({(
                 self.merge()
                 
@@ -238,16 +264,19 @@ extension RecordableMetalView{
     }
     
     public func startVideoRecoding(){
+        print("Starting")
+        iserror = false
         startRecording()
     }
     
     public func startVideoRecoding(backGroundAudioUrl: URL){
+        iserror = false
         self.trackUrl = backGroundAudioUrl
         self.isTrackSelected = true
         startRecording()
     }
     public func stopVideoRecording(){
-    
+        print("Stopping recording...")
         endRecording()
         
     }
@@ -262,4 +291,17 @@ extension UIDevice {
         return false
         #endif
     }
+}
+extension RecordableMetalView: ErrorDelegate{
+    func didErrorOccured() {
+        print("\(#function) reinitializing...")
+        iserror = true
+        DispatchQueue.main.async {
+            self.stopVideoRecording()
+            self.startVideoRecoding()
+        }
+        
+    }
+    
+    
 }

@@ -115,25 +115,23 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     
     
     func bufferCaptured(buffer: CMSampleBuffer!) {
-        
+        DispatchQueue.main.async {
         guard let pixelBuffer =  CMSampleBufferGetImageBuffer(buffer) else {
             return
         }
-        
         let imageCg = CGImage.create(pixelBuffer: pixelBuffer)
-        let maskedCg = imageByMergingImages(topImage: staticImage!, bottomImage: UIImage(cgImage: imageCg!))
+            var maskedCg = self.imageByMergingImages(topImage: self.staticImage!, bottomImage: UIImage(cgImage: imageCg!))
+            maskedCg = maskedCg.resize(size: self.meatlView.frame.size)!
         let ciimage = CIImage(cgImage: maskedCg.cgImage!)
         let image : UIImage = UIImage(ciImage: ciimage)
-        drawImage(image: image)
-        
-        
+            self.drawImage(image: image)
+        }
     }
     
     func drawImage(image: UIImage){
         
-        
-        
         guard let ciimage = image.ciImage else{
+            print("Error found")
             return
         }
         meatlView.draw(ciimage: applyFiletr(ciimage: ciimage))
@@ -176,7 +174,17 @@ class ViewController: UIViewController, RecordableMetalDelegate, CameraCaptureDe
     }
     
 }
-
+extension UIImage{
+    func resize(size: CGSize!) -> UIImage? {
+          let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
+          UIGraphicsBeginImageContext(rect.size)
+          self.draw(in:rect)
+          let img = UIGraphicsGetImageFromCurrentImageContext()
+          UIGraphicsEndImageContext()
+          return img
+      }
+      
+}
 
 
 

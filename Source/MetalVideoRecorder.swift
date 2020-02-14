@@ -1,13 +1,26 @@
+//
+//  MetalVideoRecorder.swift
+//  Nex2meV01
+//
+//  Created by Afsar Sir on 11/09/19.fAssetWriter
+//  Copyright © 2019 Introtuce. All rights reserved.
+//
+
 import Foundation
 import UIKit
 import MetalKit
 import Metal
 import AVFoundation
 import Photos
+protocol ErrorDelegate{
+    func didErrorOccured()
+}
+
+
 class MetalVideoRecorder: NSObject{
     
     var descriptioni: String
-    
+    var errorDelegate: ErrorDelegate?
     var isRecording = false
     var recordingStartTime = TimeInterval(0)
     var url: URL
@@ -17,7 +30,7 @@ class MetalVideoRecorder: NSObject{
     private var assetWriterVideoInput: AVAssetWriterInput
     private var assetWriterPixelBufferInput: AVAssetWriterInputPixelBufferAdaptor
     private var audioBuffer: CMSampleBuffer?
-    
+    private var exporter: SongExporter?
     
     //Audio related properties
     private var assertWriterAudioInput: AVAssetWriterInput
@@ -36,6 +49,7 @@ class MetalVideoRecorder: NSObject{
             self.assetWriter.shouldOptimizeForNetworkUse = true
 
         } catch {
+            print("Initialization fail with file")
             return nil
         }
         
@@ -83,7 +97,7 @@ class MetalVideoRecorder: NSObject{
         
         self.audioOutput = AVCaptureAudioDataOutput()
         self.descriptioni = "Nex2me"
-        
+        print("At metal initialization")
     }
     
     
@@ -106,23 +120,20 @@ class MetalVideoRecorder: NSObject{
             if self.session.canAddOutput(self.audioOutput) {
                 self.session.addOutput(self.audioOutput)
             }
-
-            
             self.audioConnection = self.audioOutput.connection(with: AVMediaType.audio)
             self.session.commitConfiguration()
-            /*if self.audioOutput == nil{
-                print("Audio device Not Available")
-                
-            }
-            else {
-                //print("Audio output source intiated successfully")
-            }
-        */
             self.startRecording()
        }
     }
     
-
+    func setExporter(exporter: SongExporter)  {
+        
+        self.exporter = exporter
+        
+        
+        
+    }
+    
     
     func startRecording() {
        
@@ -156,11 +167,14 @@ class MetalVideoRecorder: NSObject{
         guard let pixelBufferPool = assetWriterPixelBufferInput.pixelBufferPool else {
             print("Pixel buffer asset writer input did not have a pixel buffer pool available; cannot retrieve frame")
             //try file exits or not
-            checkFile(path: url.path)
+            if let delegate = errorDelegate{
+                delegate.didErrorOccured()
+            }
+            //checkFile(path: url.path)
             
             return
         }
-        
+       // checkFile(path: url.path)
         var maybePixelBuffer: CVPixelBuffer? = nil
         let status  = CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool, &maybePixelBuffer)
         if status != kCVReturnSuccess {
@@ -208,13 +222,16 @@ class MetalVideoRecorder: NSObject{
     
 }
 extension MetalVideoRecorder: AVCaptureAudioDataOutputSampleBufferDelegate {
-    
-    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let description = CMSampleBufferGetFormatDescription(sampleBuffer)!
+        
         if CMFormatDescriptionGetMediaType(description) == kCMMediaType_Audio {
             if self.assertWriterAudioInput.isReadyForMoreMediaData {
                 self.audioBuffer = sampleBuffer
+                if self.exporter != nil {
+                    exporter?.writeAudioAsset(buffer: sampleBuffer)
+                     print("Sending to exporter")
+                }
             }
         }
     }
