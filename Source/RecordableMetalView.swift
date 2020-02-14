@@ -80,7 +80,7 @@ public class RecordableMetalView: MTKView{
             fatalError("MetalView Doest not support simulator")
         }
         let currentTexture: MTLTexture
-        #if (arch(x86_64) || arch(i386)) && os(iOS)
+        #if targetEnvironment(simulator)
         // your simulator code
         fatalError("MetalView Doest not support simulator")
         #else
