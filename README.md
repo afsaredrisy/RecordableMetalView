@@ -9,7 +9,7 @@ We use  `MTKView`  to render custom videos and animations. MTKView does not prov
 The objective of this project is to provide easy and efficient way to directly record video + audio (Either with MIC source or Audio file). 
 
 ## Demo
-![image](demmo.gif)
+![image](demmo-2.gif)
 
 ## Feature
 * API to render (or draw) CIImage directly on MTKView with 30 fps.
@@ -36,7 +36,7 @@ pod 'RecordableMetalView'
 
 ### Creating  RecordableMetalView (Storyboard Implementation).
 Create a `MTKView` from object library and set `custom class`  of `MTKView`  to be `RecordableMetalView ` 
-![image](https://drive.google.com/uc?export=view&id=1Ivi9hLGiczXxxZt595ynLq2i0ukx-Pgq)
+![image](typeset.png)
 
 Next step is to create an outlet of this view to your `ViewController` class by draging mouse from MTKView to `ViewController` + holding `control` key. 
 
