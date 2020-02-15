@@ -1,3 +1,10 @@
+//
+//  MetalVideoRecorder.swift
+//  Nex2meV01
+//
+//  Created by Afsar Sir on 11/09/19.fAssetWriter
+//  Copyright © 2019 Introtuce. All rights reserved.
+//
 
 import AVFoundation
 import MediaPlayer
@@ -142,8 +149,8 @@ class SongExporter {
         
         let audioBufferListPtr = ioData.pointee
         //var audioBufferListPtr = UnsafeMutableAudioBufferListPointer(ioData).unsafeMutablePointer.memory
-        for i in 0 ..< Int(inNumberFrames) {
-            var buffer: AudioBuffer = audioBufferListPtr.mBuffers
+        for _ in 0 ..< Int(inNumberFrames) {
+            let buffer: AudioBuffer = audioBufferListPtr.mBuffers
             writeAudioAsset(buffer: buffer)
         }
         //writeAudioAsset(buffer: audioBufferListPtr)
